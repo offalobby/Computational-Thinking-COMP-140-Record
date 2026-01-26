@@ -82,7 +82,8 @@ def intersect(slope0, point0x, point0y, slope1, point1x, point1y):
     point
     """
     return  (slope0 * point0x - slope1 * point1x + point1y - point0y) / (slope0 - slope1), \
-            (slope0 * slope1 * (point0x - point1x) + slope0 * point1y - slope1 * point0y) / (slope0 - slope1)
+            (slope0 * slope1 * (point0x - point1x) + slope0 * point1y - slope1 * point0y) \
+            / (slope0 - slope1)
 
 def make_circle(point0x, point0y, point1x, point1y, point2x, point2y):
     """
@@ -103,7 +104,16 @@ def make_circle(point0x, point0y, point1x, point1y, point2x, point2y):
     returns: three floats that are the x- and y-coordinates of the center
     and the radius
     """
-    return 0.0, 0.0, 0.0
+    mid0x, mid0y = midpoint(point0x, point0y, point1x, point1y)
+    mid1x, mid1y = midpoint(point1x, point1y, point2x, point2y)
+
+    perp0 = perp(slope(point0x, point0y, point1x, point1y))
+    perp1 = perp(slope(point1x, point1y, point2x, point2y))
+
+    centerx, centery = intersect(perp0, mid0x, mid0y, perp1, mid1x, mid1y)
+    radius = distance(centerx, centery, point0x, point0y)
+
+    return centerx, centery, radius
 
 # Run GUI - uncomment the line below after you have
 #           implemented make_circle
