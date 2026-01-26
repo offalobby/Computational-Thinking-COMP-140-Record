@@ -6,7 +6,7 @@ statement).
 """
 
 import math
-import comp140_module1 as circles
+#import comp140_module1 as circles
 
 def distance(point0x, point0y, point1x, point1y):
     """
@@ -20,8 +20,7 @@ def distance(point0x, point0y, point1x, point1y):
 
     returns: a float that is the distance between the two points
     """
-    
-    return 0.0
+    return math.hypot(point1x - point0x, point1y - point0y)
 
 def midpoint(point0x, point0y, point1x, point1y):
     """
@@ -35,7 +34,7 @@ def midpoint(point0x, point0y, point1x, point1y):
 
     returns: two floats that are the x- and y-coordinates of the midpoint
     """
-    return 0.0, 0.0
+    return (point0x + point1x) / 2.0, (point0y + point1y) / 2.0
 
 def slope(point0x, point0y, point1x, point1y):
     """
@@ -51,7 +50,7 @@ def slope(point0x, point0y, point1x, point1y):
 
     returns: a float that is the slope between the points
     """
-    return 0.0
+    return (point1y - point0y) / (point1x - point0x)
 
 def perp(lineslope):
     """
@@ -63,7 +62,7 @@ def perp(lineslope):
 
     returns: a float that is the perpendicular slope
     """
-    return 0.0
+    return -1.0 / lineslope
 
 def intersect(slope0, point0x, point0y, slope1, point1x, point1y):
     """
@@ -82,7 +81,8 @@ def intersect(slope0, point0x, point0y, slope1, point1x, point1y):
     returns: two floats that are the x- and y-coordinates of the intersection
     point
     """
-    return 0.0, 0.0
+    return  (slope0 * point0x - slope1 * point1x + point1y - point0y) / (slope0 - slope1), \
+            (slope0 * slope1 * (point0x - point1x) + slope0 * point1y - slope1 * point0y) / (slope0 - slope1)
 
 def make_circle(point0x, point0y, point1x, point1y, point2x, point2y):
     """
